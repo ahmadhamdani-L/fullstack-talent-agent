@@ -19,6 +19,10 @@ const lite_items = (sequelize, DataTypes) => {
         type: DataTypes.STRING(225),
         allowNull: true
       },
+      price: {
+        type: DataTypes.DECIMAL,
+        allowNull: true
+      },
       lite_tale_id: {
         type: DataTypes.INTEGER,
         allowNull: true,
@@ -26,7 +30,7 @@ const lite_items = (sequelize, DataTypes) => {
           model: 'talents',
           key: 'tale_id'
         },
-        unique: "lite_items_lite_tale_id_key"
+        unique: "lite_items_lite_taca_id_lite_tale_id_key"
       },
       lite_taca_id: {
         type: DataTypes.INTEGER,
@@ -35,7 +39,7 @@ const lite_items = (sequelize, DataTypes) => {
           model: 'talents_cart',
           key: 'taca_id'
         },
-        unique: "lite_items_lite_taca_id_key"
+        unique: "lite_items_lite_taca_id_lite_tale_id_key"
       }
     }, {
       sequelize,
@@ -44,16 +48,10 @@ const lite_items = (sequelize, DataTypes) => {
       timestamps: false,
       indexes: [
         {
-          name: "lite_items_lite_taca_id_key",
+          name: "lite_items_lite_taca_id_lite_tale_id_key",
           unique: true,
           fields: [
             { name: "lite_taca_id" },
-          ]
-        },
-        {
-          name: "lite_items_lite_tale_id_key",
-          unique: true,
-          fields: [
             { name: "lite_tale_id" },
           ]
         },
@@ -64,26 +62,13 @@ const lite_items = (sequelize, DataTypes) => {
             { name: "lite_id" },
           ]
         },
-        {
-          name: "lite_taca_id",
-          unique: true,
-          fields: [
-            { name: "lite_taca_id" },
-          ]
-        },
-        {
-          name: "lite_tale_id",
-          unique: true,
-          fields: [
-            { name: "lite_tale_id" },
-          ]
-        },
       ]
-    });
+    }
+    );
     Lite_items.associate = models => {
       Lite_items.belongsTo(models.Talents, { foreignKey: 'lite_tale_id' });
       Lite_items.belongsTo(models.Talents_cart, { foreignKey: 'lite_taca_id' });
-     
+/*      Lite_items.belongsTo(models.Orders , {foreignKey: 'lite_order_name'}) */
     };
 
     return Lite_items;

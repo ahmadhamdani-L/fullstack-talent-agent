@@ -4,6 +4,8 @@ import jwt from "jsonwebtoken";
 import expressJwt from "express-jwt";
 import formidable from "formidable";
 import fs from "fs";
+import path from 'path';
+import defaultImage from '../../client/assets/images/default.jpg'
 
 // findAll = select * from users
 const findAll = async (req, res) => {
@@ -18,8 +20,8 @@ const findAll = async (req, res) => {
 };
 
 // create user with hash & salt
-/* const signup = async (req, res,next) => {
-  //const { user_name, user_email, user_password } = req.body;
+const signup = async (req, res,next) => {
+  const { user_name, user_email, user_password,user_birthdate ,user_gender,user_type} = req.body;
 
   const { dataValues } = new req.context.models.Users(req.body);
 
@@ -39,9 +41,8 @@ const findAll = async (req, res) => {
 
   return res.send(users)
 }
- */
 
-const pathDir = __dirname + "../../uploads/";
+const pathDir = __dirname + '../../uploads';
 const createAvatar = (req, res, next) => {
   const { dataValues } = new req.context.models.Users(req.body);
 
@@ -96,6 +97,7 @@ const createAvatar = (req, res, next) => {
 };
 
 const update = async (req, res) => {
+
   if (!fs.existsSync(pathDir)) {
     fs.mkdirSync(pathDir);
   }
@@ -103,49 +105,56 @@ const update = async (req, res) => {
   const form = formidable({
     multiples: true,
     uploadDir: pathDir,
-    keepExtensions: true,
+    keepExtensions: true
   });
 
+  
+
   form
-    .on("fileBegin", function (name, file) {
+    .on('fileBegin', function (name, file) {
       //rename the incoming file to the file's name
       file.path = pathDir + file.name;
     })
     .parse(req, async (err, fields, files) => {
       if (err) {
         res.status(400).json({
-          message: "Image tidak bisa diupload",
-        });
+          message: "Image tidak bisa diupload"
+        })
+      }
+      let users = new req.context.models.Users(fields);
+      const Userlama = req.cekUser
+
+      if (!Userlama) return res.status(404).send({ message: 'User to be updated not found.' })
+
+      if (!users.user_id) {
+        users.user_id = req.params.id
       }
 
-      let user = new req.context.models.Users(fields);
-      const { dataValues } = user;
-
-      const salt = AuthHelper.makeSalt();
-      const hashPassword = AuthHelper.hashPassword(
-        dataValues.user_password,
-        salt
-      );
-
-      user.user_salt = salt;
-      user.user_password = hashPassword;
-
-      if (files) {
-        user.user_avatar = files.user_avatar.name;
-        console.log(user);
+      if (Object.keys(files).length !==0) {
+        users.user_avatar = files.user_avatar.name;
       }
-
+      
+      if (users.user_password){
+        const salt = AuthHelper.makeSalt();
+        const hashPassword = AuthHelper.hashPassword(users.user_password, salt);
+        users.user_password =  hashPassword,
+        users.user_salt = salt
+      }
       try {
-        const result = await req.context.models.Users.update(user.dataValues, {
-          returning: true,
-          where: { user_id: parseInt(req.params.id) },
+        const result = await req.context.models.Users.update(users.dataValues,{
+          returning: true, where: { user_id: req.params.id }
         });
-        return res.send(result);
+        
+        return res.send(result)
       } catch (error) {
-        res.send(error.message);
+        res.status(402).send(error.message)
       }
+
+
     });
-};
+
+}
+
 
 // filter find by user_email
 const signin = async (req, res) => {
@@ -176,7 +185,7 @@ const signin = async (req, res) => {
       )
     ) {
       return res.status("401").send({
-        error: "Email and password doesn't match.",
+        error: "ccd",
       });
     }
 
@@ -201,7 +210,7 @@ const signin = async (req, res) => {
     });
   } catch (err) {
     return res.status("400").json({
-      error: "Could not retrieve user",
+      error: "kamu salah! ayo menyerah",
     });
   }
 };
@@ -256,6 +265,18 @@ const findOne = async (req, res) => {
   return res.send(users);
 };
 
+const findOneUserChart = async (req, res) => {
+  const users = await req.context.models.Users.findOne({
+    include: [
+      {
+      all:true
+      },
+    ],
+    where: { user_id: req.params.id },
+  });
+  return res.send(users);
+};
+
 const checkL = async (req, res, next) => {
   try {
     const data = await req.context.models.Users.findOne({
@@ -268,10 +289,57 @@ const checkL = async (req, res, next) => {
   }
 };
 
+const cekUser = async (req,res,next)=>{
+  try{
+    if(req.params.id===undefined || isNaN(req.params.id)) res.status(400).send({message : "Wrong Id User" })
+    const user = await req.context.models.Users.findOne({
+      where:{user_id:req.params.id}
+    })
+    req.cekUser = {
+      user_id:user.user_id
+    }
+    next()
+  }catch(error){
+    return res.status(500).send({message:`User ${error}`})
+  }
+}
+
+/* const cekEmail = async (req,res,next)=>{
+  try{
+    if(!req.body.user_email) return res.status(400).send({message : "Email can't be null" })
+    const emFormat = /^w+([.-]?w+)*@w+([.-]?w+)*(.w{2,3})+$/
+    if(req.body.user_email.match(emFormat)) return res.send({message : "Email Not Valid"})
+    const eMuser = await req.context.models.Users.findOne({
+      where:{user_email:req.body.user_email}
+    })
+    req.cekEmail = eMuser
+    next()
+  }catch(error){
+    return res.status(500).send({message:`Cek Email ${error}`})
+  }
+} */
+
+
 // Gunakan export default agar semua function bisa dipakai di file lain.
+
+const photo = async (req, res, next) => {
+  const fileName = `${pathDir}/${req.params.filename}`
+
+  if (req.params.filename !== 'null') {
+      res.set("Content-Type", "image/jpeg")
+      return res.download(fileName);
+  }
+
+  next()
+}
+
+const defaultPhoto = (req, res) => {
+  return res.sendFile(process.cwd()+defaultImage)
+  //return res.sendFile(process.cwd())
+}
 export default {
   findAll,
-  /* signup, */
+  signup,
   signin,
   update,
   requireSignin,
@@ -281,4 +349,8 @@ export default {
   check,
   findOne,
   checkL,
+  findOneUserChart,
+  cekUser,
+  photo,
+  defaultPhoto
 };

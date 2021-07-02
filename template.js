@@ -3,7 +3,7 @@ export default () => {
     <html lang="en">
       <head>
         <meta charset="utf-8">
-        <title>HRFullstack</title>
+        <title>Talents Agent Indonesia</title>
       </head>
       <body>
         <div id="root"></div>

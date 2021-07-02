@@ -54,11 +54,19 @@ const update = async (req, res) => {
     );
     return res.send(talents_image);
   }
+
+  const findOne = async (req, res) => {
+    const talents_images = await req.context.models.Talents_images.findOne({
+      where: { taim_id: req.params.id },
+    });
+    return res.send(talents_images);
+  };
   
   export default {
     create,
     findAll,
     remove,
-    createImage
+    createImage,
+    findOne
   };
   

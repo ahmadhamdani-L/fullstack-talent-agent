@@ -59,7 +59,7 @@ app.use('/api/talentscomments', routes.Talents_commentsRoute);
 app.use('/api/talentsimages', routes.TalentsImagesRoute)
 app.use('/api/UploadDownload', routes.UploadDownload)
 app.use('/api/liteitem', routes.LiteItemRoute)
-app.use('./api/shop' , routes.ShopRoute)
+app.use('/api/shop' , routes.ShopRoute)
 
 // 2. Client-Side : ReactDOMServer.
 /* app.get('/hr/*', (req, res) => {

@@ -40,8 +40,9 @@ const talents_cart = (sequelize, DataTypes)=> {
         });
 
         Talents_cart.associate = models => {
+          
+          Talents_cart.hasMany(models.Lite_items,{foreignKey: `lite_taca_id`, onDelete: `CASCADE`}),
           Talents_cart.belongsTo(models.Users, { foreignKey: 'taca_user_id' });
-          Talents_cart.hasMany(models.Lite_items, { foreignKey: 'lite_taca_id' });
          
         };
 

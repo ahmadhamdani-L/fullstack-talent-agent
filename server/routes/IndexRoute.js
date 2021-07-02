@@ -8,10 +8,10 @@ import LiteItemRoute from "./LiteItemRoute"
 import ShopRoute from "./ShopRoute"
 export default {
  
-  TalentRoute,
-  AuthRoute,
-  UploadDownload,
-  Talents_commentsRoute,
+TalentRoute,
+AuthRoute,
+UploadDownload,
+Talents_commentsRoute,
  TalentsImagesRoute,
  TalentsCartRoute,
  LiteItemRoute ,

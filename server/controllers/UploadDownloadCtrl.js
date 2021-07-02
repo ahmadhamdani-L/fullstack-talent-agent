@@ -2,7 +2,7 @@ import formidable from "formidable";
 import fs from "fs";
 
 //1.declare pathDir untuk menyimpan image di local storage
-const pathDir = __dirname + "../../../uploads/";
+const pathDir = __dirname + "../../uploads/";
 
 const upload = async (req, res, next) => {
   // jika directory belum ada then create new one

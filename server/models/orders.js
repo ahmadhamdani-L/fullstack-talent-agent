@@ -39,7 +39,7 @@ const orders = (sequelize, DataTypes) => {
       type: DataTypes.STRING(225),
       allowNull: true
     },
-    order_pyt_trx_number: {
+    order_payt_trx_number: {
       type: DataTypes.STRING(225),
       allowNull: true
     },
@@ -73,7 +73,14 @@ const orders = (sequelize, DataTypes) => {
         ]
       },
     ]
-  });    return Orders;
+  }
+  );
+   /*  Orders.associate = models => {
+      
+      Orders.hasMany(models.Lite_items, { foreignKey: 'lite_order_name', onDelete: 'CASCADE' });
+    } */
+  
+   return Orders;
 };
 
 export default orders;

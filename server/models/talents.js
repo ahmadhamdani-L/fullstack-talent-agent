@@ -41,6 +41,31 @@ const talents = (sequelize, DataTypes) => {
       allowNull: true
     },
 
+  
+
+    status: {
+      type: DataTypes.STRING(1000
+        ),
+      allowNull: true
+    },
+
+    tale_deskripsi: {
+      type: DataTypes.STRING(1000),
+      allowNull: true
+    },
+    tale_video: {
+      type: DataTypes.STRING(225),
+      allowNull: true
+    },
+    tale_video_news: {
+      type: DataTypes.STRING(225),
+      allowNull: true
+    },
+    tale_news: {
+      type: DataTypes.STRING(1000),
+      allowNull: true
+    },
+    
     tale_user_id: {
       type: DataTypes.INTEGER,
       allowNull: true,
@@ -48,7 +73,11 @@ const talents = (sequelize, DataTypes) => {
         model: 'users',
         key: 'user_id'
       }
-    }
+    },
+    tale_profile: {
+      type: DataTypes.STRING(225),
+      allowNull: true
+    },
 
   }, {
     sequelize,

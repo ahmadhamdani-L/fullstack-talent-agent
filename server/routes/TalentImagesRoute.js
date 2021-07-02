@@ -6,6 +6,7 @@ const router = Router();
 router.post("/upload",IndexCtrl.UploadDownloadCtrl.uploadMultipart,IndexCtrl.TalentImageCtrl.create,IndexCtrl.TalentImageCtrl.findAll);
 router.get("/read", IndexCtrl.TalentImageCtrl.findAll);
 router.get("/:filename", IndexCtrl.UploadDownloadCtrl.download);
+router.get("/select/:id", IndexCtrl.TalentImageCtrl.findOne);
 router.delete("/delete/:id", IndexCtrl.TalentImageCtrl.remove); 
 
 export default router;

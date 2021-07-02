@@ -29,6 +29,9 @@ import MainRouter from '../client/MainRouter'
 import { StaticRouter } from 'react-router-dom'
 import Template from '../template'
 
+import {Provider} from 'react-redux'
+import store from '../client/views/store'
+
 //comment script dibawah before building for production
 import devBundle from './devBundle'
 
@@ -41,7 +44,7 @@ const CURRENT_WORKING_DIR = process.cwd()
 app.use('/dist', express.static(path.join(CURRENT_WORKING_DIR, 'dist')))
 
 
-app.use("/TA/api/v1/test", (req, res) => {
+app.use("/talent/api/v1/test", (req, res) => {
     res.send("Hello DANI JS")
 });
 
@@ -59,17 +62,18 @@ app.use('/api/talentscomments', routes.Talents_commentsRoute);
 app.use('/api/talentsimages', routes.TalentsImagesRoute)
 app.use('/api/UploadDownload', routes.UploadDownload)
 app.use('/api/liteitem', routes.LiteItemRoute)
-app.use('./api/Shop' , routes.ShopRoute)
+app.use('/api/Shop' , routes.ShopRoute)
 
 
 // 2. Client-Side : ReactDOMServer.
-app.get('/TA', (req, res) => {
+app.get('/talent/*', (req, res) => {
 
     const context = {}
     const markup = ReactDOMServer.renderToString(
-      <StaticRouter location={req.url} context={context}>
-        <MainRouter />
+     <Provider store={store}> <StaticRouter location={req.url} context={context}>
+        <MainRouter /> 
       </StaticRouter>
+      </Provider>
     );
     if (context.url) {
       return res.redirect(303, context.url)
