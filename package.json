@@ -1,12 +1,12 @@
 {
   "name": "projecttalentagentindonesia",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "app.js",
   "license": "MIT",
   "scripts": {
-    "start": "node index.js",
+    "start": "node app.js",
     "test": "mocha --require @babel/register ./tests/TalentTest.js",
-    "build": "webpack",
+    "build": "webpack --config webpack.config.client.production.js && webpack --mode=production --config webpack.config.server.js",
     "prod": "set NODE_ENV=production node ./dist/server.generated.js",
     "reverse:db": "sequelize-auto -o ./schema-reverse -d talentagentindonesia -h localhost -u postgres -p 5432 -x admin -e postgres"
   },
