@@ -18,8 +18,8 @@ sequelize.sync({ force: dropDatabaseSync }).then(async() => {
     );
 });
 
-/* const port = process.env.PORT || 3000;
-app.listen(port,function (){
+const port = process.env.PORT || 4000;
+app.listen(port, function() {
     console.log(`server start on ${port}`)
-}) */
+})
 export default app;
