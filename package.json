@@ -4,7 +4,7 @@
     "main": "index.js",
     "license": "MIT",
     "scripts": {
-        "start": "node index.js",
+        "start": "nodemon",
         "start:dev": "nodemon",
         "test": "echo \"Error: no test specified\" && exit 1",
         "build": "webpack --config webpack.config.client.production.js && webpack --mode=production --config webpack.config.server.js",
@@ -100,8 +100,5 @@
             "last 1 firefox version",
             "last 1 safari version"
         ]
-    },
-    "optionalDependencies": {
-        "typescript": "4.2.3"
     }
 }
