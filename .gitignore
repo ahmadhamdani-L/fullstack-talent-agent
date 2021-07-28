@@ -1,6 +1,3 @@
-/node_modules
-dist
-data
-npm-debug.log
-schema-reverse
-uploads/*.env
+/node_modules/
+
+/git commit -m "initial commit"/

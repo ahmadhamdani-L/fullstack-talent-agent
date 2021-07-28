@@ -7,7 +7,7 @@ import TalentCartCtrl from "./TalentCartCtrl"
 import LiteItemCtrl from "./LiteItemCtrl"
 import OrderCtrl from "./OrderCtrl"
 export default {
-   
+
     AuthCtrl,
     TalentCtrl,
     UploadDownloadCtrl,
@@ -16,5 +16,5 @@ export default {
     TalentCartCtrl,
     LiteItemCtrl,
     OrderCtrl
-    
+
 }

@@ -3,10 +3,12 @@
     "version": "1.0.0",
     "main": "index.js",
     "license": "MIT",
+    "engines": {
+        "node": "14.x"
+    },
     "scripts": {
         "start": "nodemon",
-        "start:dev": "nodemon",
-        "test": "echo \"Error: no test specified\" && exit 1",
+        "test": "mocha --require @babel/register ./tests/TalentTest.js",
         "build": "webpack --config webpack.config.client.production.js && webpack --mode=production --config webpack.config.server.js",
         "prod": "set NODE_ENV=production node ./dist/server.generated.js",
         "reverse:db": "sequelize-auto -o ./schema-reverse -d talentagentindonesia -h localhost -u postgres -p 5432 -x admin -e postgres"
