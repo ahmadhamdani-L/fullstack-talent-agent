@@ -12,10 +12,10 @@ import config from './config'
 //   );
 
 const sequelize = new Sequelize({
-    database: "d8r3jiqauv5vm1",
-    username: "jqtunjvqpxgoix",
-    password: "e878d3058dab7483cf938585ff5781feaadc95d58e8c5997e2dbf466669010a7",
-    host: "ec2-35-169-188-58.compute-1.amazonaws.com",
+    database: "d35aa8bd80u6sr",
+    username: "rriajhfkmnvfyj",
+    password: "2bf1fea34c93ae280b0595905075c78c0e94017d96230116c50e203d8cf34c36",
+    host: "ec2-54-196-65-186.compute-1.amazonaws.com",
     port: 5432,
     dialect: "postgres",
     dialectOptions: {
