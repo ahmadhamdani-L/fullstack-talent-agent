@@ -7,10 +7,7 @@
         "node": "14.x"
     },
     "scripts": {
-        "build": "webpack --mode=development --config webpack.config.server.js && node ./dist/server.generated.js",
-        "start": "nodemon",
-        "prod": "set NODE_ENV=production node ./dist/server.generated.js",
-        "reverse:db": "sequelize-auto -o ./schema-reverse -d talentagentindonesia -h localhost -u postgres -p 5432 -x admin -e postgres"
+        "build": "webpack --mode=development --config webpack.config.server.js && node ./dist/server.generated.js"
     },
     "dependencies": {
         "@babel/core": "^7.13.0",
