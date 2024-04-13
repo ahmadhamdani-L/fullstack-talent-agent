@@ -4,7 +4,7 @@ import indexCtrl from '../controllers/IndexController'
 
 
 const router = Router();
-router.get('/read',indexCtrl.AuthCtrl.requireSignin,indexCtrl.AuthCtrl.findAll);
+// router.get('/read',indexCtrl.AuthCtrl.requireSignin,indexCtrl.AuthCtrl.findAll);
 router.post('/signin', indexCtrl.AuthCtrl.signin);
 router.post('/signup', indexCtrl.AuthCtrl.signup);
 router.get('/signout', indexCtrl.AuthCtrl.signout);

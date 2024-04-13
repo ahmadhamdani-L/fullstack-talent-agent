@@ -220,11 +220,11 @@ const signout = (req, res) => {
     });
 };
 
-const requireSignin = expressJwt({
-    secret: config.jwtSecret,
-    userProperty: "auth",
-    algorithms: ["sha1", "RS256", "HS256"],
-});
+// const requireSignin = expressJwt({
+//     secret: config.jwtSecret,
+//     userProperty: "auth",
+//     algorithms: ["sha1", "RS256", "HS256"],
+// });
 
 const remove = async(req, res) => {
     await req.context.models.Users.destroy({
@@ -336,7 +336,7 @@ export default {
     signup,
     signin,
     update,
-    requireSignin,
+    // requireSignin,
     signout,
     createAvatar,
     remove,

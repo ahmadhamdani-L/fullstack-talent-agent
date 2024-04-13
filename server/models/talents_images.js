@@ -24,14 +24,14 @@ const talents_images = (sequelize, DataTypes)=> {
       allowNull: true
     },
    
-    taim_tale_id: {
-      type: DataTypes.INTEGER,
-      allowNull: true,
-      references: {
-        model: 'talents',
-        key: 'tale_id'
-      }
-    }
+    // taim_tale_id: {
+    //   type: DataTypes.INTEGER,
+    //   allowNull: true,
+    //   references: {
+    //     model: 'talents',
+    //     key: 'tale_id'
+    //   }
+    // }
   }, {
     sequelize,
     tableName: 'talents_images',

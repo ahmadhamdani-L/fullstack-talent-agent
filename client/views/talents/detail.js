@@ -253,58 +253,58 @@ export default function detail({ match }) {
       </div>
 
       {
-        <div class="grid grid-flow-col  pt-16" >
-          <div>
-            {talents.talents_images && (
-              <img
-                src={
-                  `/api/talentsimages/` +
-                  talents.talents_images[0].taim_filename
-                }
-                alt={`${talents.tale_id}`}
+        // <div class="grid grid-flow-col  pt-16" >
+        //   <div>
+        //     {talents.talents_images && (
+        //       <img
+        //         src={
+        //           `/api/talentsimages/` +
+        //           talents.talents_images[0].taim_filename
+        //         }
+        //         alt={`${talents.tale_id}`}
               
-              />
-            )}
-          </div>
-          <div class="col-start-3">
-            {talents.talents_images && (
-              <img
-                src={
-                  `/api/talentsimages/` +
-                  talents.talents_images[1].taim_filename
-                }
-                alt={`${talents.tale_id}`}
-              />
-            )}
-          </div>
-          <div>
-            {talents.talents_images && (
-              <img
-                src={
-                  `/api/talentsimages/` +
-                  talents.talents_images[2].taim_filename
-                }
-                alt={`${talents.tale_id}`}
-              />
-            )}
-          </div>
-          <div>
-            {talents.talents_images && (
-              <img
-                src={
-                  `/api/talentsimages/` +
-                  talents.talents_images[3].taim_filename
-                }
-                alt={`${talents.tale_id}`}
-              />
-            )}
-          </div>
+        //       />
+        //     )}
+        //   </div>
+        //   <div class="col-start-3">
+        //     {talents.talents_images && (
+        //       <img
+        //         src={
+        //           `/api/talentsimages/` +
+        //           talents.talents_images[1].taim_filename
+        //         }
+        //         alt={`${talents.tale_id}`}
+        //       />
+        //     )}
+        //   </div>
+        //   <div>
+        //     {talents.talents_images && (
+        //       <img
+        //         src={
+        //           `/api/talentsimages/` +
+        //           talents.talents_images[2].taim_filename
+        //         }
+        //         alt={`${talents.tale_id}`}
+        //       />
+        //     )}
+        //   </div>
+        //   <div>
+        //     {talents.talents_images && (
+        //       <img
+        //         src={
+        //           `/api/talentsimages/` +
+        //           talents.talents_images[3].taim_filename
+        //         }
+        //         alt={`${talents.tale_id}`}
+        //       />
+        //     )}
+        //   </div>
          
-        </div>
+        // </div>
       }
 
-      
       <Footer />
     </>
   );
+  
 }
