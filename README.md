@@ -11,7 +11,7 @@
     "exec" : "babel-node ./server/server.js"
 },
 
-### untuk built-up : 
+### untuk built-up hhhh: 
 
 {
     "verbose": false,
